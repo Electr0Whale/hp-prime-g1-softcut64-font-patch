@@ -1,0 +1,48 @@
+{
+  "patch_sets": [
+    {
+      "source": "<work>\\extracted\\armfir.elf",
+      "output": "<work>\\patched\\armfir.lut48_ease150.elf",
+      "source_md5": "9e1ed504c294e70ff478e0bd5553c441",
+      "variant": "lut48_ease150",
+      "semantic": "coverage = min(coverage, 255); table maps coverage < 48 to 0; surviving coverage uses ease curve strength 1.50.",
+      "patches": [
+        {
+          "file_offset": "0x63a628",
+          "virtual_address": "0x30c3a5f4",
+          "old": "0000000000000000000000000000000000000000",
+          "new": "010c50e3ff00a0a3fc208fe20000d2e7d084f2ea",
+          "semantic": "lut48_ease150 normal-coverage stub."
+        },
+        {
+          "file_offset": "0x63a63c",
+          "virtual_address": "0x30c3a608",
+          "old": "0000000000000000000000000000000000000000",
+          "new": "010c50e3ff00a0a3e8208fe20000d2e7cb84f2ea",
+          "semantic": "lut48_ease150 inverted-coverage stub."
+        },
+        {
+          "file_offset": "0x63a734",
+          "virtual_address": "0x30c3a700",
+          "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "new": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002040607090b0d0f1012141618191b1d1f2122242628292b2d2f3032343537393a3c3e4041434546484a4b4d4e5052535557585a5b5d5f6062636566686a6b6d6e707173747677797a7c7d7f808283848687898a8c8d8e909193949597989a9b9c9e9fa0a2a3a4a5a7a8a9abacadaeb0b1b2b3b5b6b7b8babbbcbdbebfc1c2c3c4c5c6c7c8cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e3e4e5e6e7e8e9e9eaebecededeeeff0f0f1f2f2f3f4f4f5f6f6f7f7f8f8f9fafafbfbfbfcfcfdfdfdfefefeffffffff",
+          "semantic": "lut48_ease150 256-byte 8-bit coverage lookup table."
+        },
+        {
+          "file_offset": "0x2db974",
+          "virtual_address": "0x308db940",
+          "old": "010000ea",
+          "new": "307b0dea",
+          "semantic": "Redirect inverted gray_hline coverage continuation to lut48_ease150 stub."
+        },
+        {
+          "file_offset": "0x2db978",
+          "virtual_address": "0x308db944",
+          "old": "010c50e3",
+          "new": "2a7b0dea",
+          "semantic": "Redirect normal gray_hline coverage clamp to lut48_ease150 stub."
+        }
+      ]
+    }
+  ]
+}

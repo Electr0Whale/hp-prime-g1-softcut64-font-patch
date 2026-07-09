@@ -43,6 +43,19 @@ patches/round2/patch_manifest.arm_boost64_150.json
 These are post-`softcut64` candidates.  They remain parameter/algorithm-level
 coverage patches and do not include any HP binary payload.
 
+## Round3 LUT manifests
+
+```text
+patches/round3-lut/patch_manifest.arm_lut32_ease150.json
+patches/round3-lut/patch_manifest.arm_lut48_ease150.json
+patches/round3-lut/patch_manifest.arm_lut32_contrast125.json
+patches/round3-lut/patch_manifest.arm_lut48_contrast150.json
+```
+
+These use the same gray coverage patch point but route coverage through a
+256-byte lookup table.  They preserve `FT_PIXEL_MODE_GRAY` and do not include
+any HP binary payload.
+
 ## Rejected manifests
 
 ```text
@@ -81,6 +94,8 @@ reports/updater_patch_guide.rejected.md
 ```text
 images/emulator_softcut_only_comparison_crops.png
 images/emulator_softcut_only_comparison_full.png
+images/emulator_round3_comparison_crops.png
+images/emulator_round3_comparison_full.png
 ```
 
 模拟器对比图。用于说明为什么选择 `softcut64`，不是硬件最终验收。

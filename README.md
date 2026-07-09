@@ -35,6 +35,7 @@ a renderer, and does not change ELF or FAT file sizes.
 - Connectivity Kit cache helper scripts in `tools/connectivity-cache/`.
 - Rejected and experimental route notes in `reports/`.
 - Visual comparison images in `images/`.
+- Post-`softcut64` boost/LUT candidate notes and previews.
 
 ## What is not included
 
@@ -94,6 +95,7 @@ Then read the flashing guide before using the output:
 - `docs/13-research-log.md` - chronological exploration record.
 - `docs/14-artifact-index.md` - what every included artifact is for.
 - `docs/15-round2-coverage-optimization.md` - more aggressive post-softcut64 candidates.
+- `docs/16-round3-lut-and-modern-coverage-curves.md` - LUT curves and round3 preview.
 
 ## Warning
 

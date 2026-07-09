@@ -1,0 +1,48 @@
+{
+  "patch_sets": [
+    {
+      "source": "<work>\\extracted\\armfir.elf",
+      "output": "<work>\\patched\\armfir.lut48_contrast150.elf",
+      "source_md5": "9e1ed504c294e70ff478e0bd5553c441",
+      "variant": "lut48_contrast150",
+      "semantic": "coverage = min(coverage, 255); table maps coverage < 48 to 0; surviving coverage uses contrast slope 1.50 around pivot 128.",
+      "patches": [
+        {
+          "file_offset": "0x63a628",
+          "virtual_address": "0x30c3a5f4",
+          "old": "0000000000000000000000000000000000000000",
+          "new": "010c50e3ff00a0a3fc208fe20000d2e7d084f2ea",
+          "semantic": "lut48_contrast150 normal-coverage stub."
+        },
+        {
+          "file_offset": "0x63a63c",
+          "virtual_address": "0x30c3a608",
+          "old": "0000000000000000000000000000000000000000",
+          "new": "010c50e3ff00a0a3e8208fe20000d2e7cb84f2ea",
+          "semantic": "lut48_contrast150 inverted-coverage stub."
+        },
+        {
+          "file_offset": "0x63a734",
+          "virtual_address": "0x30c3a700",
+          "old": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "new": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080a0b0c0e101112141617181a1c1d1e202223242628292a2c2e2f3032343536383a3b3c3e404142444647484a4c4d4e505253545658595a5c5e5f6062646566686a6b6c6e707172747677787a7c7d7e808283848688898a8c8e8f9092949596989a9b9c9ea0a1a2a4a6a7a8aaacadaeb0b2b3b4b6b8b9babcbebfc0c2c4c5c6c8cacbccced0d1d2d4d6d7d8dadcdddee0e2e3e4e6e8e9eaeceeeff0f2f4f5f6f8fafbfcfeffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "semantic": "lut48_contrast150 256-byte 8-bit coverage lookup table."
+        },
+        {
+          "file_offset": "0x2db974",
+          "virtual_address": "0x308db940",
+          "old": "010000ea",
+          "new": "307b0dea",
+          "semantic": "Redirect inverted gray_hline coverage continuation to lut48_contrast150 stub."
+        },
+        {
+          "file_offset": "0x2db978",
+          "virtual_address": "0x308db944",
+          "old": "010c50e3",
+          "new": "2a7b0dea",
+          "semantic": "Redirect normal gray_hline coverage clamp to lut48_contrast150 stub."
+        }
+      ]
+    }
+  ]
+}

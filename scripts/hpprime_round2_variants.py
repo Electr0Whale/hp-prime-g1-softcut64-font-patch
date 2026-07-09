@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 """
-Round2 HP Prime G1 font coverage variants.
+Round2/Round3 HP Prime G1 font coverage variants.
 
 This companion script builds on hpprime_softcut64.py.  It generates, applies,
-repacks, and verifies coverage-output variants without changing the FreeType
-bitmap format.
+repacks, and verifies formula and LUT coverage-output variants without changing
+the FreeType bitmap format.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 import shutil
 from dataclasses import dataclass
@@ -50,6 +51,11 @@ SOFTBAND_INVERT_STUB_FILE = 0x63A654
 BOOST_INVERT_STUB_VA = 0x30C3A654
 BOOST_INVERT_STUB_FILE = 0x63A688
 
+LUT_INVERT_STUB_VA = 0x30C3A608
+LUT_INVERT_STUB_FILE = 0x63A63C
+LUT_VA = 0x30C3A700
+LUT_FILE = 0x63A734
+
 
 @dataclass(frozen=True)
 class Variant:
@@ -58,6 +64,8 @@ class Variant:
     low: int
     high: int | None = None
     shift: int | None = None
+    lut_kind: str | None = None
+    strength: int | None = None
 
 
 def movhs_r0_imm(imm: int) -> bytes:
@@ -99,6 +107,16 @@ def parse_variant(name: str) -> Variant:
         low = int(match.group(1))
         percent = int(match.group(2))
         return Variant(name=name, kind="boost", low=low, shift=boost_percent_to_shift(percent))
+
+    match = re.fullmatch(r"lut(\d+)_(ease|contrast)(\d+)", name)
+    if match:
+        return Variant(
+            name=name,
+            kind="lut",
+            low=int(match.group(1)),
+            lut_kind=match.group(2),
+            strength=int(match.group(3)),
+        )
 
     raise ValueError(f"Unrecognized variant name: {name}")
 
@@ -179,6 +197,83 @@ def boost_invert_stub(low: int, shift: int) -> bytes:
     )
 
 
+def add_r2_pc_imm(imm: int) -> bytes:
+    if imm < 0 or imm > 0xFF:
+        raise ValueError("this LUT helper only supports unrotated 8-bit immediates")
+    return arm_word(0xE28F2000 | imm)
+
+
+def ldrb_r0_r2_r0() -> bytes:
+    return arm_word(0xE7D20000)
+
+
+def lut_normal_stub() -> bytes:
+    table_delta = LUT_VA - (NORMAL_STUB_VA + 16)
+    return b"".join(
+        [
+            arm_word(0xE3500C01),
+            arm_word(0xA3A000FF),
+            add_r2_pc_imm(table_delta),
+            ldrb_r0_r2_r0(),
+            arm_b(NORMAL_STUB_VA + 16, CONTINUE_VA),
+        ]
+    )
+
+
+def lut_invert_stub() -> bytes:
+    table_delta = LUT_VA - (LUT_INVERT_STUB_VA + 16)
+    return b"".join(
+        [
+            arm_word(0xE3500C01),
+            arm_word(0xA3A000FF),
+            add_r2_pc_imm(table_delta),
+            ldrb_r0_r2_r0(),
+            arm_b(LUT_INVERT_STUB_VA + 16, CONTINUE_VA),
+        ]
+    )
+
+
+def ease_table(low: int, gamma_x100: int) -> bytes:
+    if low < 0 or low > 254:
+        raise ValueError("low must be 0..254")
+    gamma = gamma_x100 / 100.0
+    values = []
+    for coverage in range(256):
+        if coverage < low:
+            out = 0
+        else:
+            t = (coverage - low) / (255 - low)
+            out = round(255 * (1.0 - math.pow(1.0 - t, gamma)))
+        values.append(max(0, min(255, out)))
+    values[255] = 255
+    return bytes(values)
+
+
+def contrast_table(low: int, slope_x100: int, pivot: int = 128) -> bytes:
+    if low < 0 or low > 254:
+        raise ValueError("low must be 0..254")
+    slope = slope_x100 / 100.0
+    values = []
+    for coverage in range(256):
+        if coverage < low:
+            out = 0
+        else:
+            out = round(pivot + slope * (coverage - pivot))
+        values.append(max(0, min(255, out)))
+    values[255] = 255
+    return bytes(values)
+
+
+def lut_table(variant: Variant) -> bytes:
+    if variant.lut_kind is None or variant.strength is None:
+        raise ValueError("LUT variant requires lut_kind and strength")
+    if variant.lut_kind == "ease":
+        return ease_table(variant.low, variant.strength)
+    if variant.lut_kind == "contrast":
+        return contrast_table(variant.low, variant.strength)
+    raise ValueError(variant.lut_kind)
+
+
 def variant_stubs(variant: Variant) -> tuple[int, int, bytes, bytes]:
     if variant.kind == "softcut":
         return (
@@ -205,6 +300,13 @@ def variant_stubs(variant: Variant) -> tuple[int, int, bytes, bytes]:
             boost_normal_stub(variant.low, variant.shift),
             boost_invert_stub(variant.low, variant.shift),
         )
+    if variant.kind == "lut":
+        return (
+            LUT_INVERT_STUB_FILE,
+            LUT_INVERT_STUB_VA,
+            lut_normal_stub(),
+            lut_invert_stub(),
+        )
     raise ValueError(variant.kind)
 
 
@@ -222,6 +324,17 @@ def semantic(variant: Variant) -> str:
             f"otherwise coverage += coverage >> {variant.shift} "
             f"(about {boost_shift_to_percent(variant.shift or 1)}%), then saturate to 255."
         )
+    if variant.kind == "lut":
+        if variant.lut_kind == "ease":
+            return (
+                f"coverage = min(coverage, 255); table maps coverage < {variant.low} to 0; "
+                f"surviving coverage uses ease curve strength {variant.strength / 100:.2f}."
+            )
+        if variant.lut_kind == "contrast":
+            return (
+                f"coverage = min(coverage, 255); table maps coverage < {variant.low} to 0; "
+                f"surviving coverage uses contrast slope {variant.strength / 100:.2f} around pivot 128."
+            )
     raise ValueError(variant.kind)
 
 
@@ -236,6 +349,20 @@ def generate_manifest(work_dir: Path, variant_name: str) -> Path:
     for off, stub in ((NORMAL_STUB_FILE, normal), (invert_file, invert)):
         if data[off : off + len(stub)] != b"\0" * len(stub):
             raise ValueError(f"stub cave at 0x{off:x} is not zero-filled")
+    extra_patches = []
+    if variant.kind == "lut":
+        table = lut_table(variant)
+        if data[LUT_FILE : LUT_FILE + len(table)] != b"\0" * len(table):
+            raise ValueError(f"LUT table area at 0x{LUT_FILE:x} is not zero-filled")
+        extra_patches.append(
+            {
+                "file_offset": f"0x{LUT_FILE:x}",
+                "virtual_address": f"0x{LUT_VA:x}",
+                "old": data[LUT_FILE : LUT_FILE + len(table)].hex(),
+                "new": table.hex(),
+                "semantic": f"{variant.name} 256-byte 8-bit coverage lookup table.",
+            }
+        )
 
     patched_dir = work_dir / "patched"
     patched_dir.mkdir(parents=True, exist_ok=True)
@@ -263,6 +390,7 @@ def generate_manifest(work_dir: Path, variant_name: str) -> Path:
                         "new": invert.hex(),
                         "semantic": f"{variant.name} inverted-coverage stub.",
                     },
+                    *extra_patches,
                     {
                         "file_offset": f"0x{INVERT_BRANCH_FILE:x}",
                         "virtual_address": f"0x{INVERT_BRANCH_VA:x}",
@@ -462,10 +590,10 @@ def run_all(args: argparse.Namespace) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Generate HP Prime G1 round2 coverage variants.")
+    parser = argparse.ArgumentParser(description="Generate HP Prime G1 coverage variants.")
     sub = parser.add_subparsers(dest="command", required=True)
 
-    p = sub.add_parser("generate", help="Generate a round2 patch manifest")
+    p = sub.add_parser("generate", help="Generate a coverage patch manifest")
     p.add_argument("--work-dir", type=Path, required=True)
     p.add_argument("--variant", required=True)
 

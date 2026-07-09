@@ -97,6 +97,7 @@ Then read the flashing guide before using the output:
 - `docs/15-round2-coverage-optimization.md` - more aggressive post-softcut64 candidates.
 - `docs/16-round3-lut-and-modern-coverage-curves.md` - LUT curves and round3 preview.
 - `docs/17-lut-finetune-preview.md` - fine-tuned LUT candidates around `lut32_ease150`.
+- `docs/18-round4-hardware-validation-packages.md` - local package set prepared for the next hardware validation round.
 - `docs/candidate-selection-dashboard.html` - offline image/metric dashboard for choosing the next hardware candidate.
 
 ## Warning

@@ -104,6 +104,16 @@ reports/lut_finetune_preview_metrics.md
 
 这些报告来自探索过程，保留更多原始细节。
 
+## Hardware validation package notes
+
+```text
+docs/18-round4-hardware-validation-packages.md
+```
+
+Documents the local round4 LUT fine-tune package set prepared under
+`D:\Download\HPPrimeFontPatch_Work`.  The actual HP firmware payloads are not
+included in this repository.
+
 ## Images
 
 ```text

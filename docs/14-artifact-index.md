@@ -56,6 +56,19 @@ These use the same gray coverage patch point but route coverage through a
 256-byte lookup table.  They preserve `FT_PIXEL_MODE_GRAY` and do not include
 any HP binary payload.
 
+## LUT fine-tune manifests
+
+```text
+patches/round4-lut-finetune/patch_manifest.arm_lut24_ease140.json
+patches/round4-lut-finetune/patch_manifest.arm_lut32_ease135.json
+patches/round4-lut-finetune/patch_manifest.arm_lut32_ease170.json
+patches/round4-lut-finetune/patch_manifest.arm_lut40_ease150.json
+```
+
+These are nearby `ease` LUT parameters around `lut32_ease150`.  They are
+provided so a chosen visual style can be reproduced without shipping patched
+firmware.
+
 ## Rejected manifests
 
 ```text
@@ -86,6 +99,7 @@ reports/softband_patch_report.experimental.md
 reports/external_projects_assessment.md
 reports/updater_patch_guide.rejected.md
 reports/round3_preview_metrics.md
+reports/lut_finetune_preview_metrics.md
 ```
 
 这些报告来自探索过程，保留更多原始细节。
@@ -97,6 +111,8 @@ images/emulator_softcut_only_comparison_crops.png
 images/emulator_softcut_only_comparison_full.png
 images/emulator_round3_comparison_crops.png
 images/emulator_round3_comparison_full.png
+images/emulator_lut_finetune_comparison_crops.png
+images/emulator_lut_finetune_comparison_full.png
 ```
 
 模拟器对比图。用于说明为什么选择 `softcut64`，不是硬件最终验收。

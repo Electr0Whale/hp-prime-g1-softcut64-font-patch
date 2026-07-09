@@ -21,10 +21,22 @@ variants, and two LUT coverage-curve variants.
 
 ![round3 full comparison](../images/emulator_round3_comparison_full.png)
 
+## LUT Fine-Tune Crops
+
+This pass compares nearby `ease` LUT parameters around `lut32_ease150`.
+
+![lut fine-tune crops](../images/emulator_lut_finetune_comparison_crops.png)
+
+## LUT Fine-Tune Full Comparison
+
+![lut fine-tune full comparison](../images/emulator_lut_finetune_comparison_full.png)
+
 ## 视觉结论
 
 硬阈值路线会让低分辨率中文文字出现明显黑块和粘连。`softcut64` 没有把所有边缘直接压成黑白，而是只清掉 coverage `<64` 的浅灰边，因此更适合继续实机验证。
 
 Round3 中，`lut32_ease150` 更像“曲线调校”：保留一部分边缘信息，同时减少发灰；`boost48_125` 更直接增重；`boost48_150` 和 `lut48_contrast150` 更锐利，但也更容易让密集中文发黑。
+
+Fine-tune 中，`lut32_ease135` 是更保守版本，`lut32_ease150` 仍是中间选择，`lut32_ease170` 更硬，`lut40_ease150` 更偏锐化。
 
 这张图不是最终硬件验收。实机 LCD、缩放、拍照和模拟器渲染都会带来差异。它的作用是筛掉明显错误的参数方向，并给硬件首刷选择一个风险较低的候选。

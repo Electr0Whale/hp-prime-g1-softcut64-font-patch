@@ -85,6 +85,7 @@ reports/threshold128_patch_report.rejected.md
 reports/softband_patch_report.experimental.md
 reports/external_projects_assessment.md
 reports/updater_patch_guide.rejected.md
+reports/round3_preview_metrics.md
 ```
 
 这些报告来自探索过程，保留更多原始细节。

@@ -121,6 +121,14 @@ lut48_contrast150
 
 ![round3 full comparison](../images/emulator_round3_comparison_full.png)
 
+The companion metric report is
+[reports/round3_preview_metrics.md](../reports/round3_preview_metrics.md).
+
+It measures the four dense Chinese app-label ROIs.  In that simulator metric,
+`lut32_ease150` lands between `softcut64` and the more aggressive variants:
+it darkens strokes without pushing the largest blackish component as high as
+`boost48_150`.
+
 ## Static Verification Results
 
 For official G1 20250915 input:

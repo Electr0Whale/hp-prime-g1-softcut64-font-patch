@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HP Prime G1 Font Patch Candidate Dashboard</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f6f8;
+      --panel: #ffffff;
+      --ink: #1d232b;
+      --muted: #5f6b7a;
+      --line: #d9dee7;
+      --blue: #1f6feb;
+      --green: #18794e;
+      --amber: #9a6700;
+      --red: #c7352b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    header {
+      background: #111827;
+      color: #f9fafb;
+      padding: 20px 24px;
+      border-bottom: 1px solid #0f172a;
+    }
+
+    header h1 {
+      margin: 0 0 6px;
+      font-size: 24px;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    header p {
+      margin: 0;
+      color: #cbd5e1;
+      max-width: 920px;
+    }
+
+    main {
+      padding: 20px 24px 32px;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      margin-bottom: 18px;
+      padding: 16px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid.cards {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .candidate {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 150px;
+      background: #fbfcfe;
+    }
+
+    .candidate strong {
+      display: block;
+      font-family: Consolas, "Cascadia Mono", monospace;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-bottom: 8px;
+      border: 1px solid transparent;
+    }
+
+    .badge.best {
+      color: var(--green);
+      background: #eaf6ef;
+      border-color: #b8e2c8;
+    }
+
+    .badge.safe {
+      color: var(--blue);
+      background: #eef5ff;
+      border-color: #c9ddff;
+    }
+
+    .badge.sharp {
+      color: var(--amber);
+      background: #fff7e6;
+      border-color: #f0d28a;
+    }
+
+    .badge.risk {
+      color: var(--red);
+      background: #fff0f0;
+      border-color: #f3b7b3;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .segmented {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .segmented button {
+      border: 0;
+      background: #fff;
+      color: var(--ink);
+      padding: 8px 12px;
+      cursor: pointer;
+      min-width: 100px;
+    }
+
+    .segmented button.active {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    label {
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    input[type="range"] {
+      width: 180px;
+    }
+
+    .viewer {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: auto;
+      background: #fff;
+      min-height: 320px;
+      max-height: 72vh;
+    }
+
+    .viewer img {
+      display: block;
+      width: var(--image-width, 100%);
+      max-width: none;
+      height: auto;
+      image-rendering: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f3f5f8;
+      font-weight: 650;
+    }
+
+    code {
+      font-family: Consolas, "Cascadia Mono", monospace;
+      font-size: 13px;
+    }
+
+    .links a {
+      color: var(--blue);
+      text-decoration: none;
+      margin-right: 14px;
+      white-space: nowrap;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 720px) {
+      main {
+        padding: 14px;
+      }
+
+      header {
+        padding: 16px;
+      }
+
+      table {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>HP Prime G1 Font Patch Candidate Dashboard</h1>
+    <p>Offline comparison page for the post-softcut64 coverage-LUT experiments.  It references only public-safe manifests, reports, and simulator preview images.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Recommended Order</h2>
+      <div class="grid cards">
+        <div class="candidate">
+          <span class="badge best">first hardware candidate</span>
+          <strong>lut32_ease150</strong>
+          <p>Best current middle point.  It reduces gray fringe and darkens strokes without moving into the hardest-looking range.</p>
+        </div>
+        <div class="candidate">
+          <span class="badge safe">safer fallback</span>
+          <strong>lut32_ease135</strong>
+          <p>Use if <code>lut32_ease150</code> looks too heavy on the real LCD.  It keeps the same cutoff with a gentler curve.</p>
+        </div>
+        <div class="candidate">
+          <span class="badge sharp">sharper fallback</span>
+          <strong>lut32_ease170</strong>
+          <p>Use if <code>lut32_ease150</code> still looks too soft.  It is visibly harder and should be checked against dense Chinese text.</p>
+        </div>
+        <div class="candidate">
+          <span class="badge sharp">edge cleanup</span>
+          <strong>lut40_ease150</strong>
+          <p>Higher cutoff with the same curve.  It trims more weak edge coverage and may feel crisper but drier.</p>
+        </div>
+        <div class="candidate">
+          <span class="badge safe">natural option</span>
+          <strong>lut24_ease140</strong>
+          <p>Lower cutoff and softer curve.  It keeps more edge coverage and is the least harsh of the new fine-tune set.</p>
+        </div>
+        <div class="candidate">
+          <span class="badge risk">high risk</span>
+          <strong>boost48_150</strong>
+          <p>Useful as an upper bound for sharpness.  The preview metrics show the largest blackish component and the highest blockiness risk.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Preview Viewer</h2>
+      <div class="toolbar">
+        <div class="segmented" aria-label="preview set">
+          <button class="active" type="button" data-image="../images/emulator_lut_finetune_comparison_crops.png">Fine crops</button>
+          <button type="button" data-image="../images/emulator_lut_finetune_comparison_full.png">Fine full</button>
+          <button type="button" data-image="../images/emulator_round3_comparison_crops.png">Round3 crops</button>
+          <button type="button" data-image="../images/emulator_round3_comparison_full.png">Round3 full</button>
+        </div>
+        <label>
+          Zoom
+          <input id="zoom" type="range" min="50" max="220" value="100">
+          <span id="zoomValue">100%</span>
+        </label>
+      </div>
+      <div class="viewer" id="viewer">
+        <img id="previewImage" src="../images/emulator_lut_finetune_comparison_crops.png" alt="LUT fine-tune comparison crops">
+      </div>
+    </section>
+
+    <section>
+      <h2>Fine-Tune Metrics</h2>
+      <p class="muted">Simulator-only metrics from four dense Chinese app-label regions.  Lower midtone generally means less gray fringe; higher dark or solid means heavier strokes; larger blackish components are a blockiness warning.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Variant</th>
+            <th>Avg foreground</th>
+            <th>Avg midtone</th>
+            <th>Avg dark</th>
+            <th>Avg solid</th>
+            <th>Max blackish component</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>baseline</code></td><td>0.3334</td><td>0.8062</td><td>0.3746</td><td>0.1129</td><td>44</td></tr>
+          <tr><td><code>softcut64</code></td><td>0.2727</td><td>0.8629</td><td>0.4577</td><td>0.1371</td><td>44</td></tr>
+          <tr><td><code>lut24_ease140</code></td><td>0.3040</td><td>0.6365</td><td>0.5366</td><td>0.3144</td><td>112</td></tr>
+          <tr><td><code>lut32_ease135</code></td><td>0.2938</td><td>0.6454</td><td>0.5240</td><td>0.3064</td><td>112</td></tr>
+          <tr><td><code>lut32_ease150</code></td><td>0.2949</td><td>0.6156</td><td>0.5618</td><td>0.3397</td><td>112</td></tr>
+          <tr><td><code>lut32_ease170</code></td><td>0.2955</td><td>0.5899</td><td>0.5980</td><td>0.3805</td><td>112</td></tr>
+          <tr><td><code>lut40_ease150</code></td><td>0.2850</td><td>0.6211</td><td>0.5655</td><td>0.3422</td><td>112</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Artifacts</h2>
+      <div class="links">
+        <a href="17-lut-finetune-preview.md">Fine-tune doc</a>
+        <a href="../reports/lut_finetune_preview_metrics.md">Fine-tune metrics</a>
+        <a href="16-round3-lut-and-modern-coverage-curves.md">Round3 doc</a>
+        <a href="../reports/round3_preview_metrics.md">Round3 metrics</a>
+        <a href="../patches/round4-lut-finetune/">Fine-tune manifests</a>
+        <a href="../patches/round3-lut/">Round3 manifests</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const buttons = Array.from(document.querySelectorAll("[data-image]"));
+    const image = document.getElementById("previewImage");
+    const zoom = document.getElementById("zoom");
+    const zoomValue = document.getElementById("zoomValue");
+
+    function applyZoom() {
+      const value = Number(zoom.value);
+      document.documentElement.style.setProperty("--image-width", `${value}%`);
+      zoomValue.textContent = `${value}%`;
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        buttons.forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        image.src = button.dataset.image;
+        image.alt = button.textContent.trim();
+      });
+    });
+
+    zoom.addEventListener("input", applyZoom);
+    applyZoom();
+  </script>
+</body>
+</html>

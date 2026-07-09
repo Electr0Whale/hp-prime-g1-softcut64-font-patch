@@ -117,6 +117,15 @@ images/emulator_lut_finetune_comparison_full.png
 
 模拟器对比图。用于说明为什么选择 `softcut64`，不是硬件最终验收。
 
+## Offline dashboard
+
+```text
+docs/candidate-selection-dashboard.html
+```
+
+Static local comparison dashboard for the current candidate set.  It references
+only repository images, reports, and public-safe patch manifests.
+
 ## Example output
 
 ```text

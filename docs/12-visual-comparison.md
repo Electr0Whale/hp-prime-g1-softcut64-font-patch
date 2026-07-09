@@ -2,6 +2,9 @@
 
 模拟器阶段生成了原版和 `softcut64` 的对比图，用于确认不再采用硬阈值路线。
 
+An offline dashboard for comparing the latest candidates is available at
+[candidate-selection-dashboard.html](candidate-selection-dashboard.html).
+
 ## Crops
 
 ![softcut64 comparison crops](../images/emulator_softcut_only_comparison_crops.png)

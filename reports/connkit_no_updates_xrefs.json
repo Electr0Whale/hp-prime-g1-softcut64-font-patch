@@ -1,0 +1,18 @@
+[
+  {
+    "needle": "No updates are available",
+    "kind": "ascii",
+    "file_offset": 14045384,
+    "rva": 14053576,
+    "va": 5382762696,
+    "xrefs": []
+  },
+  {
+    "needle": "No updates are available",
+    "kind": "ascii",
+    "file_offset": 14102096,
+    "rva": 14110288,
+    "va": 5382819408,
+    "xrefs": []
+  }
+]

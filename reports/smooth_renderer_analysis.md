@@ -1,0 +1,501 @@
+# Smooth Renderer Analysis
+
+## Focused Events
+
+- `smooth_render` `0x3091bd9c` file `0x31bdd0` `010052e3`: `cmp r2, #1`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_MONO, render_mode_compare, render_mode_constant:FT_RENDER_MODE_LIGHT
+- `smooth_render` `0x3091bda0` file `0x31bdd4` `00c0a0e3`: `mov ip, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render` `0x3091bda4` file `0x31bdd8` `0020a003`: `moveq r2, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render` `0x3091bda8` file `0x31bddc` `00c08de5`: `str ip, [sp]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x0]
+- `smooth_render` `0x3091bdac` file `0x31bde0` `64a100eb`: `bl #0x30944344`
+  - tags: call
+  - call target: `0x30944344`
+- `smooth_lcd_render` `0x309373f4` file `0x337428` `0310a0e3`: `mov r1, #3`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_GRAY2, render_mode_constant:FT_RENDER_MODE_LCD
+- `smooth_lcd_render` `0x309373f8` file `0x33742c` `00108de5`: `str r1, [sp]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x0]
+- `smooth_lcd_render` `0x30937400` file `0x337434` `cf3300eb`: `bl #0x30944344`
+  - tags: call
+  - call target: `0x30944344`
+- `smooth_lcd_render` `0x30937404` file `0x337438` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_lcd_render` `0x30937408` file `0x33743c` `0510a003`: `moveq r1, #5`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_LCD, render_mode_constant:FT_RENDER_MODE_SDF
+- `smooth_lcd_render` `0x3093740c` file `0x337440` `5e10c405`: `strbeq r1, [r4, #0x5e]`
+  - tags: byte_slot_or_bitmap_access, interesting_bitmap_or_slot_offset
+  - memory: [r4+0x5e]
+- `smooth_lcdv_render` `0x3093fce4` file `0x33fd18` `0410a0e3`: `mov r1, #4`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_GRAY4, render_mode_constant:FT_RENDER_MODE_LCD_V
+- `smooth_lcdv_render` `0x3093fce8` file `0x33fd1c` `00108de5`: `str r1, [sp]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x0]
+- `smooth_lcdv_render` `0x3093fcf0` file `0x33fd24` `931100eb`: `bl #0x30944344`
+  - tags: call
+  - call target: `0x30944344`
+- `smooth_lcdv_render` `0x3093fcf4` file `0x33fd28` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_lcdv_render` `0x3093fcf8` file `0x33fd2c` `0610a003`: `moveq r1, #6`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_LCD_V
+- `smooth_lcdv_render` `0x3093fcfc` file `0x33fd30` `5e10c405`: `strbeq r1, [r4, #0x5e]`
+  - tags: byte_slot_or_bitmap_access, interesting_bitmap_or_slot_offset
+  - memory: [r4+0x5e]
+- `smooth_render_generic` `0x30944358` file `0x34438c` `24008de5`: `str r0, [sp, #0x24]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x24]
+- `smooth_render_generic` `0x30944360` file `0x344394` `a8109de5`: `ldr r1, [sp, #0xa8]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0xa8]
+- `smooth_render_generic` `0x30944364` file `0x344398` `030052e3`: `cmp r2, #3`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_GRAY2, render_mode_compare, render_mode_constant:FT_RENDER_MODE_LCD
+- `smooth_render_generic` `0x30944368` file `0x34439c` `30008de5`: `str r0, [sp, #0x30]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x30]
+- `smooth_render_generic` `0x3094436c` file `0x3443a0` `00a0a0e3`: `mov sl, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944370` file `0x3443a4` `0100a003`: `moveq r0, #1`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_MONO, render_mode_constant:FT_RENDER_MODE_LIGHT
+- `smooth_render_generic` `0x3094437c` file `0x3443b0` `28008d05`: `streq r0, [sp, #0x28]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x28]
+- `smooth_render_generic` `0x30944384` file `0x3443b8` `0000a0e3`: `mov r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944388` file `0x3443bc` `040052e3`: `cmp r2, #4`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_GRAY4, render_mode_compare, render_mode_constant:FT_RENDER_MODE_LCD_V
+- `smooth_render_generic` `0x3094438c` file `0x3443c0` `28008de5`: `str r0, [sp, #0x28]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x28]
+- `smooth_render_generic` `0x30944390` file `0x3443c4` `0100a003`: `moveq r0, #1`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_MONO, render_mode_constant:FT_RENDER_MODE_LIGHT
+- `smooth_render_generic` `0x30944398` file `0x3443cc` `0000a0e3`: `mov r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x309443a4` file `0x3443d8` `40008de5`: `str r0, [sp, #0x40]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x40]
+- `smooth_render_generic` `0x309443a8` file `0x3443dc` `0000a0e3`: `mov r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x309443b0` file `0x3443e4` `7c008de5`: `str r0, [sp, #0x7c]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x7c]
+- `smooth_render_generic` `0x309443b4` file `0x3443e8` `0600a013`: `movne r0, #6`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_LCD_V
+- `smooth_render_generic` `0x309443bc` file `0x3443f0` `010052e1`: `cmp r2, r1`
+  - tags: render_mode_compare
+- `smooth_render_generic` `0x309443c8` file `0x3443fc` `000053e3`: `cmp r3, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x309443d0` file `0x344404` `24009de5`: `ldr r0, [sp, #0x24]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x24]
+- `smooth_render_generic` `0x309443d8` file `0x34440c` `3a1dfeeb`: `bl #0x308cb8c8`
+  - tags: call
+  - call target: `0x308cb8c8`
+- `smooth_render_generic` `0x309443dc` file `0x344410` `28009de5`: `ldr r0, [sp, #0x28]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x28]
+- `smooth_render_generic` `0x309443e0` file `0x344414` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x309443e8` file `0x34441c` `14009de5`: `ldr r0, [sp, #0x14]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x14]
+- `smooth_render_generic` `0x309443f0` file `0x344424` `14008de5`: `str r0, [sp, #0x14]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x14]
+- `smooth_render_generic` `0x309443f4` file `0x344428` `0c009de5`: `ldr r0, [sp, #0xc]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0xc]
+- `smooth_render_generic` `0x309443fc` file `0x344430` `0c008de5`: `str r0, [sp, #0xc]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0xc]
+- `smooth_render_generic` `0x30944400` file `0x344434` `40009de5`: `ldr r0, [sp, #0x40]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x40]
+- `smooth_render_generic` `0x30944404` file `0x344438` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x3094440c` file `0x344440` `18009de5`: `ldr r0, [sp, #0x18]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x18]
+- `smooth_render_generic` `0x30944414` file `0x344448` `18008de5`: `str r0, [sp, #0x18]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x18]
+- `smooth_render_generic` `0x30944418` file `0x34444c` `10009de5`: `ldr r0, [sp, #0x10]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x10]
+- `smooth_render_generic` `0x30944420` file `0x344454` `10008de5`: `str r0, [sp, #0x10]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x10]
+- `smooth_render_generic` `0x30944424` file `0x344458` `28009de5`: `ldr r0, [sp, #0x28]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x28]
+- `smooth_render_generic` `0x30944428` file `0x34445c` `0c109de5`: `ldr r1, [sp, #0xc]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0xc]
+- `smooth_render_generic` `0x3094442c` file `0x344460` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944438` file `0x34446c` `0c008de5`: `str r0, [sp, #0xc]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0xc]
+- `smooth_render_generic` `0x3094443c` file `0x344470` `10009de5`: `ldr r0, [sp, #0x10]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x10]
+- `smooth_render_generic` `0x3094444c` file `0x344480` `10008de5`: `str r0, [sp, #0x10]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x10]
+- `smooth_render_generic` `0x30944450` file `0x344484` `14009de5`: `ldr r0, [sp, #0x14]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x14]
+- `smooth_render_generic` `0x30944464` file `0x344498` `14008de5`: `str r0, [sp, #0x14]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x14]
+- `smooth_render_generic` `0x30944468` file `0x34449c` `18009de5`: `ldr r0, [sp, #0x18]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x18]
+- `smooth_render_generic` `0x30944478` file `0x3444ac` `18008de5`: `str r0, [sp, #0x18]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x18]
+- `smooth_render_generic` `0x30944494` file `0x3444c8` `74008de5`: `str r0, [sp, #0x74]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x74]
+- `smooth_render_generic` `0x309444a8` file `0x3444dc` `78008de5`: `str r0, [sp, #0x78]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x78]
+- `smooth_render_generic` `0x309444b8` file `0x3444ec` `2c008de5`: `str r0, [sp, #0x2c]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x2c]
+- `smooth_render_generic` `0x309444bc` file `0x3444f0` `03008712`: `addne r0, r7, #3`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_GRAY2, render_mode_constant:FT_RENDER_MODE_LCD
+- `smooth_render_generic` `0x309444c0` file `0x3444f4` `0350c013`: `bicne r5, r0, #3`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_GRAY2, render_mode_constant:FT_RENDER_MODE_LCD
+- `smooth_render_generic` `0x309444c4` file `0x3444f8` `40009de5`: `ldr r0, [sp, #0x40]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x40]
+- `smooth_render_generic` `0x309444cc` file `0x344500` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x309444e4` file `0x344518` `010000ba`: `blt #0x309444f0`
+  - tags: call
+  - call target: `0x309444f0`
+- `smooth_render_generic` `0x309444e8` file `0x34451c` `00008de5`: `str r0, [sp]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x0]
+- `smooth_render_generic` `0x30944504` file `0x344538` `30009de5`: `ldr r0, [sp, #0x30]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x30]
+- `smooth_render_generic` `0x30944508` file `0x34453c` `7013f6eb`: `bl #0x306c92d0`
+  - tags: call
+  - call target: `0x306c92d0`
+- `smooth_render_generic` `0x3094450c` file `0x344540` `0000a0e3`: `mov r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x3094451c` file `0x344550` `0110c1e3`: `bic r1, r1, #1`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_MONO, render_mode_constant:FT_RENDER_MODE_LIGHT
+- `smooth_render_generic` `0x30944528` file `0x34455c` `30009de5`: `ldr r0, [sp, #0x30]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x30]
+- `smooth_render_generic` `0x30944530` file `0x344564` `d0f5f5eb`: `bl #0x306c1c78`
+  - tags: call
+  - call target: `0x306c1c78`
+- `smooth_render_generic` `0x30944538` file `0x34456c` `00009de5`: `ldr r0, [sp]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x0]
+- `smooth_render_generic` `0x3094453c` file `0x344570` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944544` file `0x344578` `0100a0e3`: `mov r0, #1`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_MONO, render_mode_constant:FT_RENDER_MODE_LIGHT
+- `smooth_render_generic` `0x30944548` file `0x34457c` `3c008de5`: `str r0, [sp, #0x3c]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x3c]
+- `smooth_render_generic` `0x30944550` file `0x344584` `2c109de5`: `ldr r1, [sp, #0x2c]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x2c]
+- `smooth_render_generic` `0x3094455c` file `0x344590` `01c08ce3`: `orr ip, ip, #1`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_MONO, render_mode_constant:FT_RENDER_MODE_LIGHT
+- `smooth_render_generic` `0x30944568` file `0x34459c` `74009de5`: `ldr r0, [sp, #0x74]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x74]
+- `smooth_render_generic` `0x30944574` file `0x3445a8` `78009de5`: `ldr r0, [sp, #0x78]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x78]
+- `smooth_render_generic` `0x30944578` file `0x3445ac` `0210a0e3`: `mov r1, #2`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_GRAY, render_mode_constant:FT_RENDER_MODE_MONO
+- `smooth_render_generic` `0x30944584` file `0x3445b8` `1210c4e5`: `strb r1, [r4, #0x12]`
+  - tags: byte_slot_or_bitmap_access
+  - memory: [r4+0x12]
+- `smooth_render_generic` `0x3094459c` file `0x3445d0` `24009de5`: `ldr r0, [sp, #0x24]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x24]
+- `smooth_render_generic` `0x309445a0` file `0x3445d4` `2c109de5`: `ldr r1, [sp, #0x2c]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x2c]
+- `smooth_render_generic` `0x309445a8` file `0x3445dc` `931dfeeb`: `bl #0x308cbbfc`
+  - tags: call
+  - call target: `0x308cbbfc`
+- `smooth_render_generic` `0x309445ac` file `0x3445e0` `0100a0e3`: `mov r0, #1`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_MONO, render_mode_constant:FT_RENDER_MODE_LIGHT
+- `smooth_render_generic` `0x309445b0` file `0x3445e4` `7c008de5`: `str r0, [sp, #0x7c]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x7c]
+- `smooth_render_generic` `0x309445b4` file `0x3445e8` `24009de5`: `ldr r0, [sp, #0x24]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x24]
+- `smooth_render_generic` `0x309445b8` file `0x3445ec` `0110a0e3`: `mov r1, #1`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_MONO, render_mode_constant:FT_RENDER_MODE_LIGHT
+- `smooth_render_generic` `0x309445bc` file `0x3445f0` `f804cde1`: `strd r0, r1, [sp, #0x48]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x48]
+- `smooth_render_generic` `0x309445c0` file `0x3445f4` `28009de5`: `ldr r0, [sp, #0x28]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x28]
+- `smooth_render_generic` `0x309445c4` file `0x3445f8` `44408de5`: `str r4, [sp, #0x44]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x44]
+- `smooth_render_generic` `0x309445c8` file `0x3445fc` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x309445d0` file `0x344604` `0310a0e3`: `mov r1, #3`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_GRAY2, render_mode_constant:FT_RENDER_MODE_LCD
+- `smooth_render_generic` `0x309445d8` file `0x34460c` `fdebfaeb`: `bl #0x307ff5d4`
+  - tags: call
+  - call target: `0x307ff5d4`
+- `smooth_render_generic` `0x309445e0` file `0x344614` `24009de5`: `ldr r0, [sp, #0x24]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x24]
+- `smooth_render_generic` `0x309445e4` file `0x344618` `0020a0e3`: `mov r2, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x309445ec` file `0x344620` `821dfeeb`: `bl #0x308cbbfc`
+  - tags: call
+  - call target: `0x308cbbfc`
+- `smooth_render_generic` `0x309445fc` file `0x344630` `32ff2fe1`: `blx r2`
+  - tags: call
+- `smooth_render_generic` `0x30944600` file `0x344634` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944604` file `0x344638` `00008de5`: `str r0, [sp]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x0]
+- `smooth_render_generic` `0x3094460c` file `0x344640` `24009de5`: `ldr r0, [sp, #0x24]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x24]
+- `smooth_render_generic` `0x30944610` file `0x344644` `0020a0e3`: `mov r2, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944618` file `0x34464c` `771dfeeb`: `bl #0x308cbbfc`
+  - tags: call
+  - call target: `0x308cbbfc`
+- `smooth_render_generic` `0x30944634` file `0x344668` `32ff2fe1`: `blx r2`
+  - tags: call
+- `smooth_render_generic` `0x30944638` file `0x34466c` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x3094463c` file `0x344670` `00008de5`: `str r0, [sp]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x0]
+- `smooth_render_generic` `0x30944644` file `0x344678` `24009de5`: `ldr r0, [sp, #0x24]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x24]
+- `smooth_render_generic` `0x30944648` file `0x34467c` `0020a0e3`: `mov r2, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944650` file `0x344684` `691dfeeb`: `bl #0x308cbbfc`
+  - tags: call
+  - call target: `0x308cbbfc`
+- `smooth_render_generic` `0x3094466c` file `0x3446a0` `32ff2fe1`: `blx r2`
+  - tags: call
+- `smooth_render_generic` `0x30944670` file `0x3446a4` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944674` file `0x3446a8` `00008de5`: `str r0, [sp]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x0]
+- `smooth_render_generic` `0x3094467c` file `0x3446b0` `24009de5`: `ldr r0, [sp, #0x24]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x24]
+- `smooth_render_generic` `0x30944680` file `0x3446b4` `0020a0e3`: `mov r2, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944688` file `0x3446bc` `5b1dfeeb`: `bl #0x308cbbfc`
+  - tags: call
+  - call target: `0x308cbbfc`
+- `smooth_render_generic` `0x3094469c` file `0x3446d0` `30009de5`: `ldr r0, [sp, #0x30]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x30]
+- `smooth_render_generic` `0x309446a8` file `0x3446dc` `72f5f5eb`: `bl #0x306c1c78`
+  - tags: call
+  - call target: `0x306c1c78`
+- `smooth_render_generic` `0x309446b0` file `0x3446e4` `00009de5`: `ldr r0, [sp]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x0]
+- `smooth_render_generic` `0x309446b4` file `0x3446e8` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x309446b8` file `0x3446ec` `00a0a003`: `moveq sl, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x309446c4` file `0x3446f8` `00c0d3e7`: `ldrb ip, [r3, r0]`
+  - tags: byte_slot_or_bitmap_access
+  - memory: [r3+0x0]
+- `smooth_render_generic` `0x309446d0` file `0x344704` `02c0c9e7`: `strb ip, [sb, r2]`
+  - tags: byte_slot_or_bitmap_access
+  - memory: [sb+0x0]
+- `smooth_render_generic` `0x309446d4` file `0x344708` `01c0d3e7`: `ldrb ip, [r3, r1]`
+  - tags: byte_slot_or_bitmap_access
+  - memory: [r3+0x0]
+- `smooth_render_generic` `0x309446e0` file `0x344714` `01c0c2e5`: `strb ip, [r2, #1]`
+  - tags: byte_slot_or_bitmap_access
+  - memory: [r2+0x1]
+- `smooth_render_generic` `0x309446e4` file `0x344718` `0110d3e7`: `ldrb r1, [r3, r1]`
+  - tags: byte_slot_or_bitmap_access
+  - memory: [r3+0x0]
+- `smooth_render_generic` `0x309446e8` file `0x34471c` `010080e2`: `add r0, r0, #1`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_MONO, render_mode_constant:FT_RENDER_MODE_LIGHT
+- `smooth_render_generic` `0x309446ec` file `0x344720` `0210c2e5`: `strb r1, [r2, #2]`
+  - tags: byte_slot_or_bitmap_access
+  - memory: [r2+0x2]
+- `smooth_render_generic` `0x309446f4` file `0x344728` `f2ffffba`: `blt #0x309446c4`
+  - tags: call
+  - call target: `0x309446c4`
+- `smooth_render_generic` `0x30944704` file `0x344738` `e2effaeb`: `bl #0x30800694`
+  - tags: call
+  - call target: `0x30800694`
+- `smooth_render_generic` `0x30944708` file `0x34473c` `01a08ae2`: `add sl, sl, #1`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_MONO, render_mode_constant:FT_RENDER_MODE_LIGHT
+- `smooth_render_generic` `0x30944714` file `0x344748` `0000a0b3`: `movlt r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x3094471c` file `0x344750` `f3ffffba`: `blt #0x309446f0`
+  - tags: call
+  - call target: `0x309446f0`
+- `smooth_render_generic` `0x30944720` file `0x344754` `30009de5`: `ldr r0, [sp, #0x30]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x30]
+- `smooth_render_generic` `0x30944728` file `0x34475c` `e812f6eb`: `bl #0x306c92d0`
+  - tags: call
+  - call target: `0x306c92d0`
+- `smooth_render_generic` `0x30944730` file `0x344764` `40009de5`: `ldr r0, [sp, #0x40]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x40]
+- `smooth_render_generic` `0x30944734` file `0x344768` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944740` file `0x344774` `0310a0e3`: `mov r1, #3`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_GRAY2, render_mode_constant:FT_RENDER_MODE_LCD
+- `smooth_render_generic` `0x30944750` file `0x344784` `d7ecfaeb`: `bl #0x307ffab4`
+  - tags: call
+  - call target: `0x307ffab4`
+- `smooth_render_generic` `0x30944758` file `0x34478c` `24009de5`: `ldr r0, [sp, #0x24]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x24]
+- `smooth_render_generic` `0x30944760` file `0x344794` `0010a0e3`: `mov r1, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944764` file `0x344798` `241dfeeb`: `bl #0x308cbbfc`
+  - tags: call
+  - call target: `0x308cbbfc`
+- `smooth_render_generic` `0x30944780` file `0x3447b4` `32ff2fe1`: `blx r2`
+  - tags: call
+- `smooth_render_generic` `0x30944784` file `0x3447b8` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944788` file `0x3447bc` `00008de5`: `str r0, [sp]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x0]
+- `smooth_render_generic` `0x30944790` file `0x3447c4` `24009de5`: `ldr r0, [sp, #0x24]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x24]
+- `smooth_render_generic` `0x30944798` file `0x3447cc` `0010a0e3`: `mov r1, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x3094479c` file `0x3447d0` `161dfeeb`: `bl #0x308cbbfc`
+  - tags: call
+  - call target: `0x308cbbfc`
+- `smooth_render_generic` `0x309447b8` file `0x3447ec` `32ff2fe1`: `blx r2`
+  - tags: call
+- `smooth_render_generic` `0x309447bc` file `0x3447f0` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x309447c0` file `0x3447f4` `00008de5`: `str r0, [sp]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x0]
+- `smooth_render_generic` `0x309447c8` file `0x3447fc` `24009de5`: `ldr r0, [sp, #0x24]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x24]
+- `smooth_render_generic` `0x309447d0` file `0x344804` `0010a0e3`: `mov r1, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x309447d4` file `0x344808` `081dfeeb`: `bl #0x308cbbfc`
+  - tags: call
+  - call target: `0x308cbbfc`
+- `smooth_render_generic` `0x309447f0` file `0x344824` `32ff2fe1`: `blx r2`
+  - tags: call
+- `smooth_render_generic` `0x309447f4` file `0x344828` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x309447f8` file `0x34482c` `00008de5`: `str r0, [sp]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x0]
+- `smooth_render_generic` `0x30944800` file `0x344834` `24009de5`: `ldr r0, [sp, #0x24]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x24]
+- `smooth_render_generic` `0x30944808` file `0x34483c` `0010a0e3`: `mov r1, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x3094480c` file `0x344840` `fa1cfeeb`: `bl #0x308cbbfc`
+  - tags: call
+  - call target: `0x308cbbfc`
+- `smooth_render_generic` `0x30944814` file `0x344848` `0310a0e3`: `mov r1, #3`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_GRAY2, render_mode_constant:FT_RENDER_MODE_LCD
+- `smooth_render_generic` `0x30944818` file `0x34484c` `6debfaeb`: `bl #0x307ff5d4`
+  - tags: call
+  - call target: `0x307ff5d4`
+- `smooth_render_generic` `0x3094483c` file `0x344870` `32ff2fe1`: `blx r2`
+  - tags: call
+- `smooth_render_generic` `0x30944840` file `0x344874` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944844` file `0x344878` `00008de5`: `str r0, [sp]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x0]
+- `smooth_render_generic` `0x3094484c` file `0x344880` `0000a0e3`: `mov r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944850` file `0x344884` `3c008de5`: `str r0, [sp, #0x3c]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x3c]
+- `smooth_render_generic` `0x30944854` file `0x344888` `00008de5`: `str r0, [sp]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x0]
+- `smooth_render_generic` `0x30944858` file `0x34488c` `7c009de5`: `ldr r0, [sp, #0x7c]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x7c]
+- `smooth_render_generic` `0x3094485c` file `0x344890` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944864` file `0x344898` `2c009de5`: `ldr r0, [sp, #0x2c]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x2c]
+- `smooth_render_generic` `0x30944870` file `0x3448a4` `24009de5`: `ldr r0, [sp, #0x24]`
+  - tags: interesting_bitmap_or_slot_offset, stack_argument_or_local
+  - memory: [sp+0x24]
+- `smooth_render_generic` `0x30944874` file `0x3448a8` `e01cfeeb`: `bl #0x308cbbfc`
+  - tags: call
+  - call target: `0x308cbbfc`
+- `smooth_render_generic` `0x30944878` file `0x3448ac` `3c009de5`: `ldr r0, [sp, #0x3c]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x3c]
+- `smooth_render_generic` `0x3094487c` file `0x3448b0` `000050e3`: `cmp r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x30944888` file `0x3448bc` `30009de5`: `ldr r0, [sp, #0x30]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x30]
+- `smooth_render_generic` `0x3094488c` file `0x3448c0` `8f12f6eb`: `bl #0x306c92d0`
+  - tags: call
+  - call target: `0x306c92d0`
+- `smooth_render_generic` `0x30944890` file `0x3448c4` `0000a0e3`: `mov r0, #0`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_NONE, render_mode_constant:FT_RENDER_MODE_NORMAL
+- `smooth_render_generic` `0x309448a0` file `0x3448d4` `0110c1e3`: `bic r1, r1, #1`
+  - tags: pixel_mode_constant:FT_PIXEL_MODE_MONO, render_mode_constant:FT_RENDER_MODE_LIGHT
+- `smooth_render_generic` `0x309448a8` file `0x3448dc` `00009de5`: `ldr r0, [sp]`
+  - tags: stack_argument_or_local
+  - memory: [sp+0x0]
+
+## Function Starts
+
+- `smooth_render`: VA `0x3091bd98`, file offset `0x31bdcc`, 7 decoded instructions
+- `smooth_lcd_render`: VA `0x309373ec`, file offset `0x337420`, 10 decoded instructions
+- `smooth_lcdv_render`: VA `0x3093fcdc`, file offset `0x33fd10`, 10 decoded instructions
+- `smooth_render_generic`: VA `0x30944344`, file offset `0x344378`, 348 decoded instructions
+
+## Renderer Classes
+
+- `smooth` class file `0x6bc4a0` VA `0x30cbc46c`: name `smooth`, render `0x3091bd98`, raster class `0x30cbc454`
+  - raster funcs: new `0x3091348c`, reset `0x30924164`, set_mode `0x30937560`, render `0x3092aa20`, done `0x3091c0f0`
+- `smooth-lcd` class file `0x6bc4dc` VA `0x30cbc4a8`: name `smooth-lcd`, render `0x309373ec`, raster class `0x30cbc454`
+  - raster funcs: new `0x3091348c`, reset `0x30924164`, set_mode `0x30937560`, render `0x3092aa20`, done `0x3091c0f0`
+- `smooth-lcdv` class file `0x6bc518` VA `0x30cbc4e4`: name `smooth-lcdv`, render `0x3093fcdc`, raster class `0x30cbc454`
+  - raster funcs: new `0x3091348c`, reset `0x30924164`, set_mode `0x30937560`, render `0x3092aa20`, done `0x3091c0f0`
+
+## Structure Candidate Counts
+
+- raster func candidates: 5
+- renderer class candidates: 7
+

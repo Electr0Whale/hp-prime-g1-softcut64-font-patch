@@ -1,0 +1,20 @@
+{
+  "target": "<work>\\updater_patch\\ConnectivityKit_updater_version_bypass_runtime\\Updater.exe",
+  "source": "<work>\\updater_patch\\ConnectivityKit_patched_runtime\\Updater.exe",
+  "status": "patched",
+  "source_md5": "92b78466190ab826aac3a4b404360216",
+  "source_sha256": "a8ba955b789dc663f83fe94db2eef038ae72d1249f6bf858f797312e117fd59d",
+  "output_md5": "1e3a2f9ff9cf160888485a7f19d24528",
+  "output_sha256": "d719e65980178007d753bacc269374ae1eb1172d0610785680dda29c79eb4e5e",
+  "patches": [
+    {
+      "file_offset": "0x5ce2",
+      "virtual_address": "0x1400068e2",
+      "old": "746c",
+      "new": "eb6c",
+      "semantic": "Updater.exe version/no-update gate bypass: change short conditional jump `je start_update` after `cmp eax, 3` to an unconditional short jump. This bypasses the local package availability/version filter after the selected update directory has been parsed.",
+      "before": "cmp eax, 3; je 0x140006950",
+      "after": "cmp eax, 3; jmp 0x140006950"
+    }
+  ]
+}

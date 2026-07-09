@@ -1,0 +1,39 @@
+{
+  "patch_sets": [
+    {
+      "source": "<work>\\extracted\\armfir.elf",
+      "output": "<work>\\patched\\armfir.softcut64.elf",
+      "source_md5": "9e1ed504c294e70ff478e0bd5553c441",
+      "patches": [
+        {
+          "file_offset": "0x63a628",
+          "virtual_address": "0x30c3a5f4",
+          "old": "0000000000000000000000000000000000000000",
+          "new": "010c50e3ff00a0a3400050e30000a033d084f2ea",
+          "semantic": "ARM softcut64 normal-coverage stub: clamp r0 >=256 to 255, zero r0 <64, then return to gray_hline shared callback/bitmap path."
+        },
+        {
+          "file_offset": "0x63a63c",
+          "virtual_address": "0x30c3a608",
+          "old": "000000000000000000000000",
+          "new": "400050e30000a033cd84f2ea",
+          "semantic": "ARM softcut64 inverted-coverage stub: zero r0 <64, then return to gray_hline shared callback/bitmap path."
+        },
+        {
+          "file_offset": "0x2db974",
+          "virtual_address": "0x308db940",
+          "old": "010000ea",
+          "new": "307b0dea",
+          "semantic": "Redirect inverted gray_hline coverage continuation to ARM softcut64 stub."
+        },
+        {
+          "file_offset": "0x2db978",
+          "virtual_address": "0x308db944",
+          "old": "010c50e3",
+          "new": "2a7b0dea",
+          "semantic": "Redirect normal gray_hline coverage clamp to ARM softcut64 stub. The original movge at the following instruction becomes skipped dead code."
+        }
+      ]
+    }
+  ]
+}

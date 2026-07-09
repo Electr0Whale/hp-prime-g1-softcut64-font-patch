@@ -1,0 +1,9 @@
+[
+  {
+    "source": "<work>\\extracted\\armfir.elf",
+    "output": "<work>\\patched\\armfir.softcut64.elf",
+    "source_md5": "9e1ed504c294e70ff478e0bd5553c441",
+    "output_md5": "32ac6681f1a8287db20fbe33d0035fe7",
+    "patch_count": 4
+  }
+]

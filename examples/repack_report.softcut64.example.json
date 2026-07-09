@@ -1,0 +1,19 @@
+{
+  "source_prime_app": "<work>\\firmware\\PRIME_APP.DAT",
+  "output_prime_app": "<work>\\patched_firmware\\PRIME_APP.softcut64_poc.DAT",
+  "source_prime_app_md5": "663d1f7e4d4279286387f9c29e688f78",
+  "output_prime_app_md5": "59c9a785212599acd5b676bf72e6b5c2",
+  "armfir": {
+    "path": "programs/misc/armfir.elf",
+    "offset": 945664,
+    "size": 8230724,
+    "old_md5": "9e1ed504c294e70ff478e0bd5553c441",
+    "new_md5": "32ac6681f1a8287db20fbe33d0035fe7"
+  },
+  "appslists_md5": {
+    "updated": true,
+    "old_md5_file_md5": "d1e60896d1b1d97461dab6816723864f",
+    "new_md5_file_md5": "83d0ad7ff3c94e9bbc544f8ddaf0fe8c"
+  },
+  "outer_md5": "<work>\\patched_firmware\\Prime_FW.softcut64_poc.md5"
+}

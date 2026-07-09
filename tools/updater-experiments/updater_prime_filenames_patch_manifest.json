@@ -1,0 +1,38 @@
+{
+  "source": "<work>\\updater_patch\\ConnectivityKit_patched_runtime\\Updater.exe",
+  "target": "<work>\\updater_patch\\ConnectivityKit_updater_prime_names_runtime\\Updater.exe",
+  "source_md5": "92b78466190ab826aac3a4b404360216",
+  "source_sha256": "a8ba955b789dc663f83fe94db2eef038ae72d1249f6bf858f797312e117fd59d",
+  "output_md5": "ed25ef6006a9681ab74feedcf0781748",
+  "output_sha256": "d9d526c8b47b06de71bfb0f447879e79c2c80ce5a5dfae48f082c48265b3a2f9",
+  "semantic": "Updater.exe default folder scan filter patch: accept the official PRIME_APP.DAT / PRIME_OS.ROM / PRIME_MASTER.DAT file names in the same early filter slots that originally accepted APPSDISK.DAT / BESTAARM.ROM / MASTER.DAT.",
+  "patches": [
+    {
+      "file_offset": "0x5a13",
+      "virtual_address": "0x140006613",
+      "old": "097a0000",
+      "new": "397a0000",
+      "before": "default scan accepts APPSDISK.DAT",
+      "after": "default scan accepts PRIME_APP.DAT",
+      "status": "patched"
+    },
+    {
+      "file_offset": "0x5a27",
+      "virtual_address": "0x140006627",
+      "old": "057a0000",
+      "new": "357a0000",
+      "before": "default scan accepts BESTAARM.ROM",
+      "after": "default scan accepts PRIME_OS.ROM",
+      "status": "patched"
+    },
+    {
+      "file_offset": "0x5a3b",
+      "virtual_address": "0x14000663b",
+      "old": "017a0000",
+      "new": "317a0000",
+      "before": "default scan accepts MASTER.DAT",
+      "after": "default scan accepts PRIME_MASTER.DAT",
+      "status": "patched"
+    }
+  ]
+}

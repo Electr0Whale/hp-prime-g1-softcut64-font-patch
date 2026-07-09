@@ -1,0 +1,30 @@
+# Local generated work dirs
+HPPrimeFontPatch_Work*/
+work/
+extracted/
+patched/
+patched_firmware/
+flash_package*/
+cache_backups/
+
+# HP official or derived binaries
+*.DAT
+*.ROM
+*.ELF
+*.elf
+*.exe
+*.dll
+*.ttf
+*.otf
+Prime_FW*.md5
+APPSLIST.MD5
+
+# Python/cache/editor noise
+__pycache__/
+*.pyc
+.pytest_cache/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+

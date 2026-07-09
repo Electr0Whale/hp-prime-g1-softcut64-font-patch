@@ -1,0 +1,59 @@
+{
+  "patch_sets": [
+    {
+      "source": "<work>\\emulator\\HPPrime.exe",
+      "output": "<work>\\patched_emulator\\HPPrime.softcut64.exe",
+      "source_md5": "924042c5cfced6d6fd9100b16ef1c1cf",
+      "patches": [
+        {
+          "file_offset": "0x2b4",
+          "old": "40000040",
+          "new": "40000060",
+          "semantic": ".rdata section characteristics: add IMAGE_SCN_MEM_EXECUTE so the simulator PoC stubs placed in an existing zero cave are executable."
+        },
+        {
+          "file_offset": "0xd97030",
+          "virtual_address": "0x140d99630",
+          "old": "0000000000000000000000000000000000000000000000000000000000000000",
+          "new": "8bd03d0001000041b9ff000000410f4dd14533c983fa40410f42d1e9d72cf5ff",
+          "semantic": "softcut64 stub for standalone_tail_edx: clamp coverage >=256 to 255, zero coverage <64, preserve intermediate 8-bit gray coverage."
+        },
+        {
+          "file_offset": "0xceb716",
+          "virtual_address": "0x140cec316",
+          "old": "3d000100008bd041b9ff000000410f4dd1",
+          "new": "e915d30a00909090909090909090909090",
+          "semantic": "Redirect original FreeType gray coverage clamp for standalone_tail_edx to the softcut64 stub at 0x140d99630."
+        },
+        {
+          "file_offset": "0xd97070",
+          "virtual_address": "0x140d99670",
+          "old": "00000000000000000000000000000000000000000000",
+          "new": "3d00010000410f4dc733c983f8400f42c1e90d38f5ff",
+          "semantic": "softcut64 stub for sweep_inlined_eax: clamp coverage >=256 to 255, zero coverage <64, preserve intermediate 8-bit gray coverage."
+        },
+        {
+          "file_offset": "0xcec28a",
+          "virtual_address": "0x140cece8a",
+          "old": "3d00010000410f4dc7",
+          "new": "e9e1c70a0090909090",
+          "semantic": "Redirect original FreeType gray coverage clamp for sweep_inlined_eax to the softcut64 stub at 0x140d99670."
+        },
+        {
+          "file_offset": "0xd970b0",
+          "virtual_address": "0x140d996b0",
+          "old": "0000000000000000000000000000000000000000000000000000",
+          "new": "4181f800010000450f4dc733c04183f840440f42c0e9c538f5ff",
+          "semantic": "softcut64 stub for sweep_inlined_r8d: clamp coverage >=256 to 255, zero coverage <64, preserve intermediate 8-bit gray coverage."
+        },
+        {
+          "file_offset": "0xcec384",
+          "virtual_address": "0x140cecf84",
+          "old": "4181f800010000450f4dc7",
+          "new": "e927c70a00909090909090",
+          "semantic": "Redirect original FreeType gray coverage clamp for sweep_inlined_r8d to the softcut64 stub at 0x140d996b0."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "patch_sets": [
+    {
+      "source": "<work>\\extracted\\armfir.elf",
+      "output": "<work>\\patched\\armfir.coverage255.elf",
+      "source_md5": "9e1ed504c294e70ff478e0bd5553c441",
+      "patches": [
+        {
+          "file_offset": "0x2db9b8",
+          "vaddr": "0x308db984",
+          "old": "ff2000e2",
+          "new": "ff2080e3",
+          "old_instruction": "and r2, r0, #0xff",
+          "new_instruction": "orr r2, r0, #0xff",
+          "semantic": "FreeType gray_hline non-DIRECT bitmap path: force every emitted gray coverage byte to 0xff while preserving FT_PIXEL_MODE_GRAY and the one-byte-per-pixel bitmap layout."
+        }
+      ]
+    }
+  ]
+}
+

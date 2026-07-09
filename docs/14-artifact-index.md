@@ -27,6 +27,22 @@ patches/patch_manifest.arm_softcut64.apply_results.json
 
 `softcut64` 是当前推荐候选。
 
+## Round2 manifests
+
+```text
+patches/round2/patch_manifest.arm_softcut48.json
+patches/round2/patch_manifest.arm_softcut80.json
+patches/round2/patch_manifest.arm_softband48_240.json
+patches/round2/patch_manifest.arm_softband64_240.json
+patches/round2/patch_manifest.arm_boost48_125.json
+patches/round2/patch_manifest.arm_boost64_125.json
+patches/round2/patch_manifest.arm_boost48_150.json
+patches/round2/patch_manifest.arm_boost64_150.json
+```
+
+These are post-`softcut64` candidates.  They remain parameter/algorithm-level
+coverage patches and do not include any HP binary payload.
+
 ## Rejected manifests
 
 ```text
@@ -76,4 +92,3 @@ examples/repack_report.softcut64.example.json
 ```
 
 示例 repack report，路径已替换为 `<work>` 占位符。
-

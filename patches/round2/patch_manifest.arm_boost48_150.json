@@ -1,0 +1,42 @@
+{
+  "patch_sets": [
+    {
+      "source": "<work>\\extracted\\armfir.elf",
+      "output": "<work>\\patched\\armfir.boost48_150.elf",
+      "source_md5": "9e1ed504c294e70ff478e0bd5553c441",
+      "variant": "boost48_150",
+      "semantic": "coverage = min(coverage, 255); if coverage < 48, set to 0; otherwise coverage += coverage >> 1 (about 150%), then saturate to 255.",
+      "patches": [
+        {
+          "file_offset": "0x63a628",
+          "virtual_address": "0x30c3a5f4",
+          "old": "0000000000000000000000000000000000000000000000000000000000000000",
+          "new": "010c50e3ff00a0a3300050e30000a033a0008020010c50e3ff00a0a3cd84f2ea",
+          "semantic": "boost48_150 normal-coverage stub."
+        },
+        {
+          "file_offset": "0x63a688",
+          "virtual_address": "0x30c3a654",
+          "old": "000000000000000000000000000000000000000000000000",
+          "new": "300050e30000a033a0008020010c50e3ff00a0a3b784f2ea",
+          "semantic": "boost48_150 inverted-coverage stub."
+        },
+        {
+          "file_offset": "0x2db974",
+          "virtual_address": "0x308db940",
+          "old": "010000ea",
+          "new": "437b0dea",
+          "semantic": "Redirect inverted gray_hline coverage continuation to boost48_150 stub."
+        },
+        {
+          "file_offset": "0x2db978",
+          "virtual_address": "0x308db944",
+          "old": "010c50e3",
+          "new": "2a7b0dea",
+          "semantic": "Redirect normal gray_hline coverage clamp to boost48_150 stub."
+        }
+      ]
+    }
+  ]
+}
+

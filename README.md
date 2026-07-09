@@ -93,6 +93,7 @@ Then read the flashing guide before using the output:
 - `docs/12-visual-comparison.md` - simulator comparison images and visual conclusion.
 - `docs/13-research-log.md` - chronological exploration record.
 - `docs/14-artifact-index.md` - what every included artifact is for.
+- `docs/15-round2-coverage-optimization.md` - more aggressive post-softcut64 candidates.
 
 ## Warning
 

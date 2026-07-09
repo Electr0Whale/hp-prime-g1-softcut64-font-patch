@@ -1,0 +1,42 @@
+{
+  "patch_sets": [
+    {
+      "source": "<work>\\extracted\\armfir.elf",
+      "output": "<work>\\patched\\armfir.softband64_240.elf",
+      "source_md5": "9e1ed504c294e70ff478e0bd5553c441",
+      "variant": "softband64_240",
+      "semantic": "coverage = min(coverage, 255); if coverage < 64, set to 0; if coverage >= 240, set to 255.",
+      "patches": [
+        {
+          "file_offset": "0x63a628",
+          "virtual_address": "0x30c3a5f4",
+          "old": "00000000000000000000000000000000000000000000000000000000",
+          "new": "010c50e3ff00a0a3400050e30000a033f00050e3ff00a023ce84f2ea",
+          "semantic": "softband64_240 normal-coverage stub."
+        },
+        {
+          "file_offset": "0x63a654",
+          "virtual_address": "0x30c3a620",
+          "old": "0000000000000000000000000000000000000000",
+          "new": "400050e30000a033f00050e3ff00a023c584f2ea",
+          "semantic": "softband64_240 inverted-coverage stub."
+        },
+        {
+          "file_offset": "0x2db974",
+          "virtual_address": "0x308db940",
+          "old": "010000ea",
+          "new": "367b0dea",
+          "semantic": "Redirect inverted gray_hline coverage continuation to softband64_240 stub."
+        },
+        {
+          "file_offset": "0x2db978",
+          "virtual_address": "0x308db944",
+          "old": "010c50e3",
+          "new": "2a7b0dea",
+          "semantic": "Redirect normal gray_hline coverage clamp to softband64_240 stub."
+        }
+      ]
+    }
+  ]
+}
+

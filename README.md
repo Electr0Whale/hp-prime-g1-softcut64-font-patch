@@ -23,6 +23,18 @@
 - Connectivity Kit 缓存安装流程：已在本机验证。
 - 实机效果与长期稳定性：仍需用户自行验证。
 
+### 无损视觉对比
+
+左侧是官方 `PrimeSansFull + 官方原始灰度`，右侧是 `Sarasa CJK MaxCoverage + lut32_ease150`。截图来自相同模拟器场景；PNG 未经过有损压缩。完整窗口图以 2 倍无损捕获，下面的 LCD 图保留捕获图中的原始像素，不再缩放。
+
+[打开完整分辨率图片](images/stock-vs-sarasa-cjk-lut32-ease150-full.png)
+
+![官方字体官方渲染与 Sarasa CJK MaxCoverage + lut32_ease150 完整窗口对比](images/stock-vs-sarasa-cjk-lut32-ease150-full.png)
+
+[打开 LCD 原像素图片](images/stock-vs-sarasa-cjk-lut32-ease150-lcd-native.png)
+
+![官方字体官方渲染与 Sarasa CJK MaxCoverage + lut32_ease150 LCD 原像素对比](images/stock-vs-sarasa-cjk-lut32-ease150-lcd-native.png)
+
 ### 仓库不包含
 
 由于版权、许可和安全原因，本仓库不提供 HP 官方固件、模拟器、Connectivity Kit、提取出的 HP 字体、修改后的 `PRIME_APP.DAT` 或完整混合 TTF。请自行取得官方文件并在本地生成产物。
@@ -59,6 +71,10 @@ The current hardware candidate is `lut32_ease150 + Sarasa CJK MaxCoverage`:
 - Static firmware, FAT16, font-slot, and inner/outer MD5 verification: passed.
 - Connectivity Kit cache installation workflow: locally verified.
 - Hardware appearance and long-term stability: still user-validated experimental work.
+
+### Lossless visual comparison
+
+The left side uses stock `PrimeSansFull + stock grayscale`; the right side uses `Sarasa CJK MaxCoverage + lut32_ease150`. Both screenshots use the same emulator scene and lossless PNG encoding. The full-window image is a lossless 2× capture, while the LCD crop preserves the captured pixels without additional scaling. See the comparison images in the Chinese section above or open the [full-resolution comparison](images/stock-vs-sarasa-cjk-lut32-ease150-full.png) and [native-pixel LCD crop](images/stock-vs-sarasa-cjk-lut32-ease150-lcd-native.png).
 
 ### Not included
 

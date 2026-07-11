@@ -51,7 +51,9 @@ if ((Test-Path -LiteralPath $CachePath -PathType Container) -and -not $NoBackup)
 }
 
 New-Item -ItemType Directory -Force -Path $CachePath | Out-Null
-Copy-Item -LiteralPath (Join-Path $pkg '*') -Destination $CachePath -Recurse -Force
+Get-ChildItem -LiteralPath $pkg -Force | ForEach-Object {
+  Copy-Item -LiteralPath $_.FullName -Destination $CachePath -Recurse -Force
+}
 
 $manifest = [ordered]@{
   package_path = $pkg
@@ -80,4 +82,3 @@ if ($backupPath) {
 }
 Write-Host "Manifest:"
 Write-Host "  $manifestPath"
-

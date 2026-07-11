@@ -1,0 +1,29 @@
+{
+  "variant": "sarasa_cjk_maxcoverage_lut32_ease150",
+  "target": "HP Prime G1 official firmware 20250915",
+  "status": "cache_prepared_waiting_for_manual_hardware_validation",
+  "font": {
+    "units_per_em": 256,
+    "size": 4613200,
+    "slot_offset_in_armfir_dat": "0x40B140",
+    "slot_size": 4613520,
+    "zero_padding": 320,
+    "sarasa_cjk_ideographs": 16914,
+    "prime_non_cjk_retained": 2632,
+    "shared_ideographs_omitted": 10872,
+    "sha256": "4be714aa90bb6f0f48bb7b395bb79a61ce42fcad682749b5215dea0ab1a444b4"
+  },
+  "firmware": {
+    "base_prime_app_md5": "ff1433c4b422a1a6cf30c9c1389dd9a0",
+    "output_prime_app_md5": "c97cd74b3b3de4d6c60da4bd08481a99",
+    "output_prime_app_sha256": "56f5bc341e6c4f3f23715dcc8319fc62d79d21278f2f3530143372752b3bc503",
+    "allowed_changes": [
+      "PrimeSansFull slot inside programs/misc/armfir.dat",
+      "FAT16 APPSLIST.MD5 cluster"
+    ],
+    "armfir_elf_lut_patch_unchanged": true,
+    "prime_master_unchanged": true,
+    "prime_os_unchanged": true
+  },
+  "distribution": "metadata only; no HP firmware, extracted HP font, hybrid TTF, or patched binary is included"
+}

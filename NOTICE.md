@@ -11,4 +11,8 @@ firmware binary is included in this repository.
 Use at your own risk. Firmware modification can cause data loss or device
 failure.
 
+Sarasa Gothic is a separate third-party project by Belleve Invis and
+contributors, distributed under the SIL Open Font License 1.1. This repository
+records transformation parameters and hashes but does not redistribute the
+hybrid font because it also contains glyph data extracted from HP firmware.
 

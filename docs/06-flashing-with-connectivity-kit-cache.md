@@ -1,5 +1,10 @@
 # Flashing With Connectivity Kit Cache
 
+> Status note: the newer `lut32_ease150 + Sarasa CJK MaxCoverage` package has
+> been generated, statically verified, and installed into a local Connectivity
+> Kit cache. Manual hardware validation is still pending; this is not a claim of
+> a successful device flash. See `docs/19-sarasa-cjk-lut32-ease150.md`.
+
 当前推荐刷入路线是 HP Connectivity Kit 的 G1 本地固件缓存。
 
 这条路线来自实测：修改缓存目录中的中文 release HTML 后，Connectivity Kit 更新页面同步显示了修改内容，说明更新 UI 会读取该缓存。
@@ -42,7 +47,7 @@ $cache = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'HP Connectivit
   -BackupRoot "$work\cache_backups"
 ```
 
-脚本会先备份原缓存，再复制 patched package。
+脚本会先备份原缓存，再复制 patched package。对于实机候选，建议进一步采用同盘 staging、完整 13 行 MD5 验证和目录交换；任何异常都应恢复原缓存，不能在未验证完成时直接覆盖唯一缓存副本。
 
 再次验证：
 
@@ -90,5 +95,4 @@ Calculators pane -> right click calculator -> Update firmware
 探索中确实定位并尝试过 standalone `Updater.exe` 的文件名过滤和版本/no-update 分支，但 patched Updater 在本地实测直接闪退。当前不推荐它作为刷入路径。
 
 相关记录见 `docs/08-updater-analysis.md`。
-
 

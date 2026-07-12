@@ -86,7 +86,7 @@ stroke sticking.
 ## Generate Round2 Variants
 
 ```powershell
-$repo = 'D:\Download\hp-prime-g1-softcut64-font-patch'
+$repo = 'D:\Download\hp-prime-g1-cjk-patch'
 $fw = 'D:\Download\HP_Prime_Calculator_Firmware_20250915'
 $work = 'D:\Download\hpprime-round2-work'
 $py = 'python'
@@ -168,4 +168,3 @@ Judgement criteria:
 
 If a variant produces black blocks or unreadable Chinese, stop testing that
 branch and go back to `softcut64` or stock.
-

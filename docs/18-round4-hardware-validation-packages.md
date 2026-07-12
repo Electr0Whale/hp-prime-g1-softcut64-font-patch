@@ -95,7 +95,7 @@ Then restart HP Connectivity Kit and use its firmware update workflow.
 ## Reproduce Packages Yourself
 
 ```powershell
-$repo = 'D:\Download\hp-prime-g1-softcut64-font-patch'
+$repo = 'D:\Download\hp-prime-g1-cjk-patch'
 $fw = 'D:\Download\HP_Prime_Calculator_Firmware_20250915'
 $work = 'D:\Download\hpprime-round4-lut-work'
 $py = 'python'

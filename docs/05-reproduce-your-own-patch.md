@@ -7,7 +7,7 @@
 PowerShell 7：
 
 ```powershell
-$repo = 'D:\Download\hp-prime-g1-softcut64-font-patch'
+$repo = 'D:\Download\hp-prime-g1-cjk-patch'
 $fw = 'D:\Download\HP_Prime_Calculator_Firmware_20250915'
 $work = 'D:\Download\hpprime-softcut64-work'
 $py = 'python'
@@ -142,5 +142,4 @@ flash_package_softcut64\
 ```
 
 本仓库的 `.gitignore` 已经覆盖这些常见路径。
-
 

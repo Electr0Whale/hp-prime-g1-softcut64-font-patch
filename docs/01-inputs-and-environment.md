@@ -29,7 +29,7 @@ Python 3.10+ 即可。脚本只用标准库。
 推荐目录变量：
 
 ```powershell
-$repo = 'D:\Download\hp-prime-g1-softcut64-font-patch'
+$repo = 'D:\Download\hp-prime-g1-cjk-patch'
 $fw = 'D:\Download\HP_Prime_Calculator_Firmware_20250915'
 $work = 'D:\Download\hpprime-softcut64-work'
 ```
@@ -62,5 +62,4 @@ PRIME_APP.DAT softcut64 repacked  59c9a785212599acd5b676bf72e6b5c2
 ```
 
 如果你的官方 `PRIME_APP.DAT` 或提取出的 `armfir.elf` MD5 不一致，不要直接套用本补丁。先重新做静态定位。
-
 

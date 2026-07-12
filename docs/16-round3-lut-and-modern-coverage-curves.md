@@ -154,7 +154,7 @@ Verification covered:
 The existing round2 helper now also recognizes LUT variant names:
 
 ```powershell
-$repo = 'D:\Download\hp-prime-g1-softcut64-font-patch'
+$repo = 'D:\Download\hp-prime-g1-cjk-patch'
 $fw = 'D:\Download\HP_Prime_Calculator_Firmware_20250915'
 $work = 'D:\Download\hpprime-round3-lut-work'
 $py = 'python'
